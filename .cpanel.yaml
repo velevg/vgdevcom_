@@ -1,0 +1,13 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/vgdevcom/public_html # Set the deployment path
+    - /bin/cp -R * $DEPLOYPATH # Copy all files to deployment path
+    - cd $DEPLOYPATH # Change directory to deployment path
+    - /usr/local/bin/composer install --no-dev --optimize-autoloader # Install composer dependencies without dev packages
+    - /usr/local/bin/php artisan cache:clear # Clear Laravel cache
+    - /usr/local/bin/php artisan config:cache # Cache Laravel configuration
+    - /usr/local/bin/php artisan route:cache # Cache routes for faster route registration
+    - /usr/local/bin/php artisan view:clear # Clear compiled views
+    - /usr/local/bin/php artisan migrate --force # Run database migrations
+    - /bin/chmod -R 755 storage bootstrap/cache # Set appropriate permissions

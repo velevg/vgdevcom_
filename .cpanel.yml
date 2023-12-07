@@ -1,0 +1,8 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/vgdevcom/public_html/
+    - /bin/cp -r * $DEPLOYPATH
+    - /bin/cp -r .[^.]* $DEPLOYPATH # Copy hidden files/directories
+    - /bin/rm -rf $DEPLOYPATH/.git # Remove .git folder after deployment
+    
